@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/input/smartcity_disaster_alert.schema.json",
+  "title": "Smart City Disaster Alert Event",
+  "type": "object",
+  "required": [
+    "header",
+    "payload"
+  ],
+  "properties": {
+    "header": {
+      "allOf": [
+        {
+          "$ref": "../common.defs.json#/$defs/event_header"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_type": {
+              "const": "smartcity.disaster.alert"
+            }
+          },
+          "required": [
+            "event_type"
+          ]
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "hazard_type",
+        "area",
+        "valid_from",
+        "valid_to"
+      ],
+      "properties": {
+        "hazard_type": {
+          "type": "string",
+          "enum": [
+            "storm",
+            "flood",
+            "fire",
+            "air_raid",
+            "chemical",
+            "unknown"
+          ]
+        },
+        "area": {
+          "$ref": "../common.defs.json#/$defs/geojson_polygon"
+        },
+        "recommended_actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "shelter",
+              "evacuate",
+              "avoid_area",
+              "monitor_updates"
+            ]
+          },
+          "default": []
+        },
+        "valid_from": {
+          "$ref": "../common.defs.json#/$defs/iso_datetime_utc"
+        },
+        "valid_to": {
+          "$ref": "../common.defs.json#/$defs/iso_datetime_utc"
+        },
+        "issuer": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

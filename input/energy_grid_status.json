@@ -1,0 +1,44 @@
+{
+  "header": {
+    "event_id": "11111111-1111-4111-8111-111111111111",
+    "event_type": "energy.grid.status",
+    "source_system": "demo.source",
+    "observed_at": "2026-03-03T18:20:00Z",
+    "location": {
+      "zone_id": "KH-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2304,
+          49.9935
+        ]
+      },
+      "address_hint": "Kharkiv campus zone"
+    },
+    "severity": 0.9,
+    "confidence": 0.85,
+    "correlation_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+    "tags": [
+      "prototype",
+      "synthetic"
+    ]
+  },
+  "payload": {
+    "grid_state": "blackout",
+    "available_power_kw": 120.0,
+    "critical_load_kw": 180.0,
+    "ups_soc_pct": 62.5,
+    "generator": {
+      "status": "starting",
+      "fuel_minutes_remaining": 240
+    },
+    "microgrid": {
+      "status": "off",
+      "mode": "grid_tied"
+    },
+    "constraints": {
+      "load_shed_required": true,
+      "max_noncritical_kw": 30.0
+    }
+  }
+}

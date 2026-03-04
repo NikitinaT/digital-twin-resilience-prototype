@@ -1,0 +1,64 @@
+{
+  "header": {
+    "event_id": "44444444-4444-4444-8444-444444444444",
+    "event_type": "smartcity.disaster.alert",
+    "source_system": "demo.source",
+    "observed_at": "2026-03-03T18:20:00Z",
+    "location": {
+      "zone_id": "KH-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2304,
+          49.9935
+        ]
+      },
+      "address_hint": "Kharkiv campus zone"
+    },
+    "severity": 0.6,
+    "confidence": 0.8,
+    "correlation_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+    "tags": [
+      "prototype",
+      "synthetic"
+    ]
+  },
+  "payload": {
+    "hazard_type": "air_raid",
+    "area": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            36.22,
+            49.99
+          ],
+          [
+            36.24,
+            49.99
+          ],
+          [
+            36.24,
+            50.0
+          ],
+          [
+            36.22,
+            50.0
+          ],
+          [
+            36.22,
+            49.99
+          ]
+        ]
+      ]
+    },
+    "recommended_actions": [
+      "shelter",
+      "avoid_area",
+      "monitor_updates"
+    ],
+    "valid_from": "2026-03-03T18:20:00Z",
+    "valid_to": "2026-03-03T19:10:00Z",
+    "issuer": "city.emergency.service"
+  }
+}

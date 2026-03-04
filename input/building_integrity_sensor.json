@@ -1,0 +1,48 @@
+{
+  "header": {
+    "event_id": "22222222-2222-4222-8222-222222222222",
+    "event_type": "building.integrity.sensor",
+    "source_system": "demo.source",
+    "observed_at": "2026-03-03T18:20:00Z",
+    "location": {
+      "zone_id": "KH-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2304,
+          49.9935
+        ]
+      },
+      "address_hint": "Kharkiv campus zone"
+    },
+    "severity": 0.8,
+    "confidence": 0.75,
+    "correlation_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+    "tags": [
+      "prototype",
+      "synthetic"
+    ]
+  },
+  "payload": {
+    "building_id": "B-12",
+    "integrity_state": "suspected_damage",
+    "anomaly_signals": [
+      {
+        "type": "vibration_rms",
+        "value": 3.2,
+        "unit": "mm/s"
+      },
+      {
+        "type": "smoke_ppm",
+        "value": 12.0,
+        "unit": "ppm"
+      }
+    ],
+    "access_state": "restricted",
+    "lifesafety": {
+      "fire_alarm": false,
+      "smoke": true,
+      "evacuation_required": true
+    }
+  }
+}

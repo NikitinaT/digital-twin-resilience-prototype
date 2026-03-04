@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/input/cybersecurity_intel.schema.json",
+  "title": "Cybersecurity Intelligence Event",
+  "type": "object",
+  "required": [
+    "header",
+    "payload"
+  ],
+  "properties": {
+    "header": {
+      "allOf": [
+        {
+          "$ref": "../common.defs.json#/$defs/event_header"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_type": {
+              "const": "cyber.security.intel"
+            }
+          },
+          "required": [
+            "event_type"
+          ]
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "incident_type",
+        "affected_systems"
+      ],
+      "properties": {
+        "incident_type": {
+          "type": "string",
+          "enum": [
+            "ddos",
+            "malware",
+            "phishing",
+            "intrusion",
+            "service_outage"
+          ]
+        },
+        "affected_systems": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "system",
+              "criticality",
+              "status"
+            ],
+            "properties": {
+              "system": {
+                "type": "string",
+                "minLength": 1
+              },
+              "criticality": {
+                "type": "string",
+                "enum": [
+                  "tier1",
+                  "tier2",
+                  "tier3"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "degraded",
+                  "down",
+                  "compromised",
+                  "recovered"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "ioc_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "recommended_controls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "isolate",
+              "block_ip",
+              "rotate_keys",
+              "failover",
+              "patch",
+              "monitor"
+            ]
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

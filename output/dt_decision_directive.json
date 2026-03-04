@@ -1,0 +1,58 @@
+{
+  "decision_id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",
+  "generated_at": "2026-03-03T18:20:00Z",
+  "state_context": "S3",
+  "inputs_used": [
+    "11111111-1111-4111-8111-111111111111",
+    "22222222-2222-4222-8222-222222222222",
+    "33333333-3333-4333-8333-333333333333"
+  ],
+  "rationale": "Blackout detected; prioritized Tier-1 services and rerouted academic activities to safe buildings.",
+  "confidence": 0.83,
+  "actions": [
+    {
+      "action_type": "tier_activation",
+      "priority": 1,
+      "target": {
+        "zone_id": "KH-01"
+      },
+      "parameters": {
+        "tier": "Tier 1",
+        "mode": "emergency"
+      }
+    },
+    {
+      "action_type": "energy_allocation",
+      "priority": 1,
+      "target": {
+        "building_id": "B-CTRL"
+      },
+      "parameters": {
+        "allocated_kw": 80.0,
+        "source": "battery+generator"
+      }
+    },
+    {
+      "action_type": "schedule_reconfiguration",
+      "priority": 2,
+      "target": {
+        "system": "timetable"
+      },
+      "parameters": {
+        "strategy": "move_to_safe_buildings_and_remote",
+        "effective_until": "2026-03-04T18:20:00Z"
+      }
+    },
+    {
+      "action_type": "inspection_dispatch",
+      "priority": 2,
+      "target": {
+        "building_id": "B-12"
+      },
+      "parameters": {
+        "method": "uav",
+        "mission_id": "UAV-M-0008"
+      }
+    }
+  ]
+}

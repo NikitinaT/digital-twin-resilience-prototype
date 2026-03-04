@@ -1,0 +1,79 @@
+{
+  "header": {
+    "event_id": "33333333-3333-4333-8333-333333333333",
+    "event_type": "uav.spatial.assessment",
+    "source_system": "demo.source",
+    "observed_at": "2026-03-03T18:20:00Z",
+    "location": {
+      "zone_id": "KH-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2304,
+          49.9935
+        ]
+      },
+      "address_hint": "Kharkiv campus zone"
+    },
+    "severity": 0.7,
+    "confidence": 0.9,
+    "correlation_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+    "tags": [
+      "prototype",
+      "synthetic"
+    ]
+  },
+  "payload": {
+    "mission_id": "UAV-M-0007",
+    "observed_assets": [
+      {
+        "asset_type": "building",
+        "asset_id": "B-12",
+        "damage_grade": 3,
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                36.22,
+                49.99
+              ],
+              [
+                36.24,
+                49.99
+              ],
+              [
+                36.24,
+                50.0
+              ],
+              [
+                36.22,
+                50.0
+              ],
+              [
+                36.22,
+                49.99
+              ]
+            ]
+          ]
+        },
+        "notes": "Facade damage visible; debris near entrance."
+      }
+    ],
+    "media_refs": {
+      "images": [
+        "img://uav/0007/frame_001"
+      ],
+      "video": [
+        "vid://uav/0007/clip_a"
+      ]
+    },
+    "derived_metrics": {
+      "damage_probability": 0.82,
+      "blocked_routes": [
+        "R-3",
+        "R-7"
+      ]
+    }
+  }
+}

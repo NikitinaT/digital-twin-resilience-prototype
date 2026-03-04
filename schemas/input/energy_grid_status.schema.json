@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/input/energy_grid_status.schema.json",
+  "title": "Energy Grid Status Event",
+  "type": "object",
+  "required": [
+    "header",
+    "payload"
+  ],
+  "properties": {
+    "header": {
+      "allOf": [
+        {
+          "$ref": "../common.defs.json#/$defs/event_header"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_type": {
+              "const": "energy.grid.status"
+            }
+          },
+          "required": [
+            "event_type"
+          ]
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "grid_state",
+        "available_power_kw",
+        "critical_load_kw"
+      ],
+      "properties": {
+        "grid_state": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "degraded",
+            "blackout",
+            "islanded"
+          ]
+        },
+        "available_power_kw": {
+          "type": "number",
+          "minimum": 0
+        },
+        "critical_load_kw": {
+          "type": "number",
+          "minimum": 0
+        },
+        "ups_soc_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "generator": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "off",
+                "starting",
+                "online",
+                "fault"
+              ]
+            },
+            "fuel_minutes_remaining": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "microgrid": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "off",
+                "online",
+                "fault"
+              ]
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "grid_tied",
+                "island"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "constraints": {
+          "type": "object",
+          "properties": {
+            "load_shed_required": {
+              "type": "boolean"
+            },
+            "max_noncritical_kw": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

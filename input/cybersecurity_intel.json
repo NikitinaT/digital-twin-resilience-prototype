@@ -1,0 +1,50 @@
+{
+  "header": {
+    "event_id": "55555555-5555-4555-8555-555555555555",
+    "event_type": "cyber.security.intel",
+    "source_system": "demo.source",
+    "observed_at": "2026-03-03T18:20:00Z",
+    "location": {
+      "zone_id": "KH-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2304,
+          49.9935
+        ]
+      },
+      "address_hint": "Kharkiv campus zone"
+    },
+    "severity": 0.5,
+    "confidence": 0.7,
+    "correlation_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+    "tags": [
+      "prototype",
+      "synthetic"
+    ]
+  },
+  "payload": {
+    "incident_type": "ddos",
+    "affected_systems": [
+      {
+        "system": "vpn-gateway",
+        "criticality": "tier1",
+        "status": "degraded"
+      },
+      {
+        "system": "lms",
+        "criticality": "tier2",
+        "status": "down"
+      }
+    ],
+    "ioc_refs": [
+      "ip:203.0.113.10",
+      "asn:AS64496"
+    ],
+    "recommended_controls": [
+      "block_ip",
+      "failover",
+      "monitor"
+    ]
+  }
+}

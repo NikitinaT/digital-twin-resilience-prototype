@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/input/building_integrity_sensor.schema.json",
+  "title": "Building Integrity Sensor Event",
+  "type": "object",
+  "required": [
+    "header",
+    "payload"
+  ],
+  "properties": {
+    "header": {
+      "allOf": [
+        {
+          "$ref": "../common.defs.json#/$defs/event_header"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_type": {
+              "const": "building.integrity.sensor"
+            }
+          },
+          "required": [
+            "event_type"
+          ]
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "building_id",
+        "integrity_state",
+        "access_state"
+      ],
+      "properties": {
+        "building_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "integrity_state": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "suspected_damage",
+            "confirmed_damage",
+            "unsafe"
+          ]
+        },
+        "anomaly_signals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "value"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": "number"
+              },
+              "unit": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "access_state": {
+          "type": "string",
+          "enum": [
+            "open",
+            "restricted",
+            "closed"
+          ]
+        },
+        "lifesafety": {
+          "type": "object",
+          "properties": {
+            "fire_alarm": {
+              "type": "boolean"
+            },
+            "smoke": {
+              "type": "boolean"
+            },
+            "evacuation_required": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

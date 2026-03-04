@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/input/human_avatar_feedback.schema.json",
+  "title": "Human Avatar Feedback Event",
+  "type": "object",
+  "required": [
+    "header",
+    "payload"
+  ],
+  "properties": {
+    "header": {
+      "allOf": [
+        {
+          "$ref": "../common.defs.json#/$defs/event_header"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "event_type": {
+              "const": "human.avatar.feedback"
+            }
+          },
+          "required": [
+            "event_type"
+          ]
+        }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "actor",
+        "report_type",
+        "signals"
+      ],
+      "properties": {
+        "actor": {
+          "type": "object",
+          "required": [
+            "role",
+            "org_unit",
+            "anonymized_id"
+          ],
+          "properties": {
+            "role": {
+              "type": "string",
+              "enum": [
+                "student",
+                "staff",
+                "faculty",
+                "security",
+                "operator",
+                "guest"
+              ]
+            },
+            "org_unit": {
+              "type": "string",
+              "minLength": 1
+            },
+            "anonymized_id": {
+              "type": "string",
+              "minLength": 3
+            }
+          },
+          "additionalProperties": false
+        },
+        "report_type": {
+          "type": "string",
+          "enum": [
+            "needs",
+            "observation",
+            "confirmation",
+            "request"
+          ]
+        },
+        "signals": {
+          "type": "object",
+          "required": [
+            "stress_level"
+          ],
+          "properties": {
+            "stress_level": {
+              "$ref": "../common.defs.json#/$defs/probability"
+            },
+            "mobility_limitations": {
+              "type": "boolean"
+            },
+            "priority_needs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false
+        },
+        "free_text": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "requested_support": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "route_to_shelter",
+              "medical_help",
+              "info_update",
+              "transport",
+              "power_access"
+            ]
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

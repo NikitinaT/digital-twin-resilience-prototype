@@ -1,0 +1,48 @@
+{
+  "header": {
+    "event_id": "66666666-6666-4666-8666-666666666666",
+    "event_type": "human.avatar.feedback",
+    "source_system": "demo.source",
+    "observed_at": "2026-03-03T18:20:00Z",
+    "location": {
+      "zone_id": "KH-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.2304,
+          49.9935
+        ]
+      },
+      "address_hint": "Kharkiv campus zone"
+    },
+    "severity": 0.4,
+    "confidence": 0.65,
+    "correlation_id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb",
+    "tags": [
+      "prototype",
+      "synthetic"
+    ]
+  },
+  "payload": {
+    "actor": {
+      "role": "student",
+      "org_unit": "CS Dept",
+      "anonymized_id": "anon-7f3c"
+    },
+    "report_type": "needs",
+    "signals": {
+      "stress_level": 0.78,
+      "mobility_limitations": false,
+      "priority_needs": [
+        "power_access",
+        "info_update"
+      ]
+    },
+    "free_text": "Requesting guidance on safe routes to shelter and power availability for charging.",
+    "requested_support": [
+      "route_to_shelter",
+      "info_update",
+      "power_access"
+    ]
+  }
+}

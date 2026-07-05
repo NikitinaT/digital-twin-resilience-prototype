@@ -3,89 +3,154 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Digital Twin Resilience — Visual Prototype</title>
+  <title>University Resilience under Prolonged Disruption</title>
   <style>
     :root {
-      --bg: #0b1020;
-      --card: rgba(255,255,255,0.06);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.72);
+      --bg: #07111f;
+      --panel: rgba(16, 31, 52, 0.92);
+      --panel2: rgba(255,255,255,0.045);
+      --text: rgba(255,255,255,0.94);
+      --muted: rgba(220,230,245,0.72);
       --border: rgba(255,255,255,0.12);
-      --accent: #7aa2ff;
+      --blue: #55a8ff;
+      --cyan: #31d5cc;
+      --orange: #ffb45a;
+      --red: #ff6b6b;
+      --purple: #b18cff;
+      --green: #58d68d;
+      --shadow: 0 20px 70px rgba(0,0,0,0.34);
     }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 50% 0%, rgba(122,162,255,0.18), transparent 60%), var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:
+        radial-gradient(1100px 560px at 30% 0%, rgba(85,168,255,0.18), transparent 62%),
+        linear-gradient(180deg, #07111f 0%, #050914 100%);
       color: var(--text);
+      line-height: 1.55;
     }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 48px; }
-    header {
-      display:flex; gap:12px; align-items:baseline; justify-content:space-between; flex-wrap:wrap;
-      margin-bottom: 16px;
-    }
-    h1 { font-size: 22px; margin: 0; letter-spacing: 0.2px; }
-    .sub { color: var(--muted); font-size: 13px; margin-top: 6px; }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.28);
-    }
-    video { width: 100%; border-radius: 12px; display:block; background: #000; }
-    .meta {
-      margin-top: 12px;
-      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .pill {
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,0.18);
-    }
-    a { color: var(--accent); text-decoration: none; }
+    .wrap { max-width: 1380px; margin: 0 auto; padding: 34px 24px 46px; }
+    header { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; margin-bottom: 26px; }
+    h1 { margin: 0 0 8px; font-size: clamp(2rem, 3.8vw, 3.7rem); line-height: 1.06; letter-spacing: -0.045em; }
+    .sub { color: var(--blue); font-size: clamp(1.05rem, 1.7vw, 1.35rem); font-weight: 600; }
+    .badge, .pill { border: 1px solid var(--border); background: rgba(255,255,255,0.04); border-radius: 999px; padding: 9px 13px; color: var(--text); font-size: 0.92rem; white-space: nowrap; }
+    .grid { display: grid; gap: 22px; }
+    .hero { grid-template-columns: 0.85fr 1.75fr; align-items: stretch; margin-bottom: 24px; }
+    .panel { background: linear-gradient(180deg, var(--panel), rgba(9,18,32,0.94)); border: 1px solid var(--border); border-radius: 18px; box-shadow: var(--shadow); }
+    .intro { padding: 24px; }
+    .intro p { color: var(--muted); margin: 0 0 22px; font-size: 1.02rem; }
+    h2 { margin: 0 0 14px; font-size: 1.28rem; letter-spacing: -0.02em; }
+    .features { display: grid; gap: 13px; }
+    .feature { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 13px; background: var(--panel2); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; }
+    .icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); font-size: 1.25rem; }
+    .blue { background: rgba(85,168,255,0.15); color: var(--blue); }
+    .orange { background: rgba(255,180,90,0.15); color: var(--orange); }
+    .green { background: rgba(88,214,141,0.15); color: var(--green); }
+    .purple { background: rgba(177,140,255,0.15); color: var(--purple); }
+    .red { background: rgba(255,107,107,0.15); color: var(--red); }
+    .cyan { background: rgba(49,213,204,0.15); color: var(--cyan); }
+    .feature strong { display:block; margin-bottom: 3px; }
+    .feature span, .scenario p, .flow-card li, .resource span, footer { color: var(--muted); }
+    .video-card { padding: 14px; }
+    video { width: 100%; display: block; background: #000; border-radius: 14px; border: 1px solid rgba(255,255,255,0.13); }
+    .video-note { margin: 12px 4px 0; color: var(--muted); font-size: 0.92rem; }
+    .scenario-grid { grid-template-columns: repeat(5, 1fr); margin-bottom: 24px; }
+    .scenario { padding: 17px; min-height: 182px; }
+    .scenario h3 { margin: 10px 0 8px; font-size: 1rem; }
+    .impact { margin-top: 10px !important; color: var(--text) !important; font-size: 0.9rem; }
+    .system { grid-template-columns: 1.42fr 0.72fr; }
+    .flow, .background { padding: 22px; }
+    .flow-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+    .flow-card { position: relative; min-height: 148px; padding: 17px; background: var(--panel2); border: 1px solid var(--border); border-radius: 16px; }
+    .flow-card:not(:last-child)::after { content: "→"; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.55); font-size: 1.35rem; z-index: 3; }
+    .flow-card h3 { margin: 0 0 8px; font-size: 0.97rem; }
+    .flow-card ul { margin: 0; padding-left: 17px; font-size: 0.9rem; }
+    .resource { display: grid; grid-template-columns: 42px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .resource:last-child { border-bottom: none; }
+    a { color: var(--blue); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    footer { margin-top: 16px; color: var(--muted); font-size: 12px; }
+    footer { margin-top: 22px; font-size: 0.9rem; font-style: italic; }
+    @media (max-width: 1120px) {
+      .hero, .system { grid-template-columns: 1fr; }
+      .scenario-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow-row { grid-template-columns: 1fr; }
+      .flow-card:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 650px) {
+      header { flex-direction: column; }
+      .scenario-grid { grid-template-columns: 1fr; }
+      .wrap { padding: 22px 14px 34px; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <main class="wrap">
     <header>
       <div>
-        <h1>Digital Twin Resilience — Visual Prototype</h1>
-        <div class="sub">Scenario visualization for university operations under disruption (S0–S3).</div>
+        <h1>University Resilience under Prolonged Disruption</h1>
+        <div class="sub">Digital Twin Prototype for Situational Awareness and Decision Support</div>
       </div>
-      <div class="pill">Static demo • GitHub</div>
+      <div class="badge">Static demo · GitHub Pages</div>
     </header>
 
-    <div class="card">
-      <video controls playsinline preload="metadata">
-        <source src="frontend/public/assets/video/digital_twin_university_visual_prototype.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      <div class="meta">
-        <div class="pill">Video: <code>frontend/public/assets/video/digital_twin_university_visual_prototype.mp4</code></div>
-        <div class="pill">Docs: <a href="https://github.com/NikitinaT/digital-twin-resilience-prototype/blob/main/Digital_Twin_Resilience_Prototype.ipynb" target="_blank" rel="noreferrer">Repository root</a></div>
-      </div>
-      <div class="meta" style="margin-top: 10px;">
-        <div class="pill">
-          <strong>Related Publication (Nikitina T., Morozova O., Kharchenko V.):</strong>
-          <a href="https://link.springer.com/chapter/10.1007/978-3-032-10477-9_13" target="_blank" rel="noreferrer">
-            <em>A Resilience Model for Borderline University Infrastructure in Wartime</em>
-            — Springer
-          </a>
+    <section class="grid hero">
+      <aside class="panel intro">
+        <p>
+          This prototype shows a disrupted university environment and illustrates how a campus-scale Digital Twin can support leadership awareness and operational decisions when the university must continue functioning during prolonged disruption.
+        </p>
+        <h2>What this prototype shows</h2>
+        <div class="features">
+          <div class="feature"><div class="icon blue">▣</div><div><strong>University-scale Digital Twin</strong><span>Buildings, infrastructure, environment, and operational state represented as one connected model.</span></div></div>
+          <div class="feature"><div class="icon orange">⚠</div><div><strong>Disruption environment</strong><span>Electricity blackout, physical damage, communication loss, access restrictions, and severe weather.</span></div></div>
+          <div class="feature"><div class="icon green">👥</div><div><strong>Situational awareness</strong><span>A shared picture for university leadership, operational teams, researchers, students, and infrastructure services.</span></div></div>
+          <div class="feature"><div class="icon purple">▥</div><div><strong>Decision support</strong><span>Impact assessment and prioritisation of actions to maintain critical university functions.</span></div></div>
         </div>
-      </div>     
-      <footer>
-        Data are synthetic but calibrated to publicly available statistics.
-      </footer>
+      </aside>
 
-    </div>
-  </div>
+      <section class="panel video-card">
+        <video controls playsinline preload="metadata" poster="frontend/public/assets/img/1_1.png">
+          <source src="frontend/public/assets/video/digital_twin_university_visual_prototype.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-note">Video: animated scenario visualization of a university operating under disruption. Data are synthetic and used for research demonstration.</div>
+      </section>
+    </section>
+
+    <section>
+      <h2>Scenario Examples</h2>
+      <div class="grid scenario-grid">
+        <article class="panel scenario"><div class="icon orange">⚡</div><h3>S1 — Energy Disruption</h3><p>Partial or complete power outage affecting campus operations and critical facilities.</p><p class="impact"><strong>Impacts:</strong> labs, IT systems, lighting, heating/cooling.</p></article>
+        <article class="panel scenario"><div class="icon red">▦</div><h3>S2 — Physical Damage</h3><p>Damage to buildings and infrastructure caused by external impact or hazardous events.</p><p class="impact"><strong>Impacts:</strong> accessibility, safety, facility availability.</p></article>
+        <article class="panel scenario"><div class="icon purple">⌁</div><h3>S3 — Communication Loss</h3><p>Loss or degradation of internet, mobile connectivity, or internal communication systems.</p><p class="impact"><strong>Impacts:</strong> coordination, remote work, data exchange.</p></article>
+        <article class="panel scenario"><div class="icon blue">🔒</div><h3>S4 — Access Restriction</h3><p>Restricted access to parts of the campus due to safety, security, or external conditions.</p><p class="impact"><strong>Impacts:</strong> mobility, deliveries, emergency response.</p></article>
+        <article class="panel scenario"><div class="icon green">☁</div><h3>S5 — Extreme Weather</h3><p>Severe weather conditions affecting infrastructure, safety, and campus continuity.</p><p class="impact"><strong>Impacts:</strong> heat, flooding, wind damage, transport disruption.</p></article>
+      </div>
+    </section>
+
+    <section class="grid system">
+      <div class="panel flow">
+        <h2>System Concept</h2>
+        <div class="flow-row">
+          <div class="flow-card"><h3>Data Sources</h3><ul><li>IoT sensors</li><li>Infrastructure systems</li><li>External data</li><li>User reports</li></ul></div>
+          <div class="flow-card"><h3>Digital Twin Layer</h3><ul><li>3D campus model</li><li>Infrastructure state</li><li>Environment</li><li>Hazard events</li></ul></div>
+          <div class="flow-card"><h3>Analytics & Assessment</h3><ul><li>Risk analysis</li><li>Impact evaluation</li><li>Scenario simulation</li><li>Resource status</li></ul></div>
+          <div class="flow-card"><h3>Decision Support</h3><ul><li>Prioritisation</li><li>Response planning</li><li>Resource allocation</li><li>Continuity strategies</li></ul></div>
+          <div class="flow-card"><h3>Actions & Coordination</h3><ul><li>Operational response</li><li>Communication</li><li>Monitoring</li><li>Feedback loop</li></ul></div>
+        </div>
+      </div>
+
+      <aside class="panel background">
+        <h2>Research Background</h2>
+        <div class="resource"><div class="icon blue">📄</div><div><strong>Published research</strong><span>Nikitina T., Morozova O., Kharchenko V. <em>A Resilience Model for Borderline University Infrastructure in Wartime</em>. Springer CCIS, 2025.</span></div></div>
+        <div class="resource"><div class="icon cyan">↗</div><div><strong>Digital Twin prototype</strong><span>Visual scenario demonstrator for university resilience analysis.</span></div></div>
+        <div class="resource"><div class="icon green">▶</div><div><strong>GitHub repository</strong><span><a href="https://github.com/NikitinaT/digital-twin-resilience-prototype" target="_blank" rel="noreferrer">Project source code and prototype materials</a></span></div></div>
+      </aside>
+    </section>
+
+    <footer>
+      This prototype is a research demonstrator. It is intended to explain the operating environment of a university under prolonged disruption and the role of a Digital Twin in decision support.
+    </footer>
+  </main>
 </body>
 </html>
